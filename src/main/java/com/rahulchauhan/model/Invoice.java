@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 public class Invoice {
 
-    private String id, userId, pdfUrl;
+    private String userId, pdfUrl;
 
-    private Integer amount;
+    private Integer amount, id;
 }

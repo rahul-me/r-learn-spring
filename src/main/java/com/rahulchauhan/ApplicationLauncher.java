@@ -1,7 +1,6 @@
 package com.rahulchauhan;
 
-import com.rahulchauhan.context.PdfinvoiceAppConfiguration;
-import com.rahulchauhan.web.MyFancyPdfInvoicesServlet;
+import com.rahulchauhan.context.ApplicationConfiguration;
 import jakarta.servlet.ServletContext;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
@@ -62,7 +61,7 @@ public class ApplicationLauncher {
      */
     public static WebApplicationContext createApplicationContext(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(PdfinvoiceAppConfiguration.class);
+        ctx.register(ApplicationConfiguration.class);
         ctx.setServletContext(servletContext);
         ctx.refresh();
         ctx.registerShutdownHook();

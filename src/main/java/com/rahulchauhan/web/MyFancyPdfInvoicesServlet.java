@@ -1,7 +1,7 @@
 package com.rahulchauhan.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rahulchauhan.context.PdfinvoiceAppConfiguration;
+import com.rahulchauhan.context.ApplicationConfiguration;
 import com.rahulchauhan.model.Invoice;
 import com.rahulchauhan.service.InvoiceService;
 import com.rahulchauhan.service.UserService;
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.IOException;
 import java.util.List;
 
+@Deprecated
 public class MyFancyPdfInvoicesServlet extends HttpServlet {
 
     UserService userService;
@@ -25,7 +26,7 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(PdfinvoiceAppConfiguration.class);
+                = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
         userService = context.getBean(UserService.class);
         invoiceService = context.getBean(InvoiceService.class);
         objectMapper = context.getBean(ObjectMapper.class);
