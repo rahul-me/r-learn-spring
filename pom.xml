@@ -48,6 +48,74 @@
             <version>6.0.9</version>
         </dependency>
 
+<!--
+
+READ-8
+
+After adding xml dependency response looks like below.
+
+Why is that?
+
+Think back to @EnableWebMvc. It tried to look at your classpath,
+i.e. what libraries you have added to your project. And if it finds the JSON library,
+it automatically creates a Spring JSON converter. If it finds an XML library, it automatically creates an XML converter.
+
+This means your application now has two converters (XML and JSON) and they have a certain order with different priorities.
+
+The XML converter has a higher default priority, that is why you are now receiving XML, instead of JSON.
+
+
+<List>
+    <item>
+        <id>c5e57657-49a4-4852-a3bc-2cd7c2e020b2</id>
+        <userId>user-id-1</userId>
+        <pdfUrl>http://www.africau.edu/images/default/sample.pdf</pdfUrl>
+        <amount>20</amount>
+    </item>
+    <item>
+        <id>7de112db-6561-4eb6-a11d-7c5818750321</id>
+        <userId>user-id-2</userId>
+        <pdfUrl>http://www.africau.edu/images/default/sample.pdf</pdfUrl>
+        <amount>100</amount>
+    </item>
+</List>
+-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+
+<!--        We need below dependencies in combination-->
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+        <!--        Need in combination-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>6.0.9</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
