@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -62,18 +63,21 @@ public class InvoiceService {
 
     List<Invoice> invoices = new CopyOnWriteArrayList<>();
 
+    @Transactional
     public List<Invoice> findAll() {
 
         List<Invoice> invoices = jdbcTemplate.query("select * from invoice", invoiceRowMapper);
         return invoices;
     }
 
+    @Transactional
     public Invoice findByUser(String userId) {
         return jdbcTemplate.queryForObject("select * from invoice where userid = ?", invoiceRowMapper , userId);
     }
 
 
 
+    @Transactional
     public Invoice create(String userId, Integer amount) {
 
         Invoice invoice = new Invoice();
@@ -106,6 +110,7 @@ public class InvoiceService {
         return invoice;
     }
 
+    @Transactional
     public Invoice createAndGetGeneratedId(String userId, int amount) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update( con -> {
