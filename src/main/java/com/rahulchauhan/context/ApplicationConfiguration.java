@@ -8,9 +8,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 /**
  * READ-2
@@ -67,6 +71,14 @@ import javax.sql.DataSource;
  * automatically registers a JSON converter with Spring MVC, as long as you have the jackson dependency on your classpath.
  */
 @EnableWebMvc
+
+
+/**
+ * You need to annotate your Spring configuration with the @EnableTransactionManagement annotation.
+ * It allows you to use the @Transactional annotation, to declare transactions programmatically.
+ * (You do not need to do this when using Spring Boot, as it will apply this annotation automatically for you.)
+ */
+@EnableTransactionManagement
 public class ApplicationConfiguration {
 
     @Bean
@@ -86,5 +98,16 @@ public class ApplicationConfiguration {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    /**
+     * Reference: https://www.marcobehler.com/courses/spring-professional/spring-database/spring-database-transactions
+     *
+     * @param dataSource
+     * @return
+     */
+    @Bean
+    public TransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 }

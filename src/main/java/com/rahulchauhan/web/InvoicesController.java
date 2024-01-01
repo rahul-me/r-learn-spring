@@ -67,7 +67,8 @@ public class InvoicesController {
 
     @PostMapping
     public Invoice create( @RequestBody @Valid InvoiceRequest invoiceRequest) {
-        return invoiceService.create(invoiceRequest.getUserId(), invoiceRequest.getAmount());
+//        return invoiceService.create(invoiceRequest.getUserId(), invoiceRequest.getAmount());
+        return invoiceService.createAndGetGeneratedId(invoiceRequest.getUserId(), invoiceRequest.getAmount());
     }
 
     @PostMapping("/params")

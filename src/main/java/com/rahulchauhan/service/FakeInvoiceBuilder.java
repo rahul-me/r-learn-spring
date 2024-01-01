@@ -16,6 +16,6 @@ public class FakeInvoiceBuilder {
     public void fakeInvoices() {
         System.out.println("Faking invoices...");
         invoiceService.create("user-id-1", 20);
-        invoiceService.create("user-id-2", 100);
+//        invoiceService.create("user-id-2", 100);
     }
 }
